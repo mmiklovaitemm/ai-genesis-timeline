@@ -25,7 +25,7 @@ Each chapter has a quiz question and a comments section where you can share your
 - Scroll-driven animations with pinned sections and scrub effects
 - Animated neural network on the hero screen (Canvas API)
 - Per-chapter quiz with live statistics
-- Comments — post anonymously or sign in with GitHub
+- Comments - post anonymously or sign in with GitHub
 - Final score screen with player percentile comparison
 - Full English and Lithuanian language support
 - Dark minimalist design with per-epoch accent colors
