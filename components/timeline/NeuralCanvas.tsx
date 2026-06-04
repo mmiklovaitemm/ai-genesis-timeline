@@ -18,9 +18,13 @@ export default function NeuralCanvas() {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-    const cvs = canvas // captured non-null reference for closures
+    const cvs = canvas
     const ctx = cvs.getContext('2d')!
     let animId: number
+
+    const isMobile = window.matchMedia('(max-width: 1023px)').matches
+    const NODE_COUNT = isMobile ? 28 : 65
+    const MAX_DIST = isMobile ? 120 : 160
 
     const resize = () => {
       cvs.width = window.innerWidth
@@ -28,9 +32,6 @@ export default function NeuralCanvas() {
     }
     resize()
     window.addEventListener('resize', resize)
-
-    const NODE_COUNT = 65
-    const MAX_DIST = 160
 
     const nodes: Node[] = Array.from({ length: NODE_COUNT }, () => ({
       x: Math.random() * cvs.width,
@@ -74,16 +75,17 @@ export default function NeuralCanvas() {
 
         const r = node.radius + Math.sin(node.pulse) * 0.6
 
-        // Outer glow
-        const grad = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, r * 5)
-        grad.addColorStop(0, 'rgba(74,144,217,0.15)')
-        grad.addColorStop(1, 'rgba(74,144,217,0)')
-        ctx.beginPath()
-        ctx.arc(node.x, node.y, r * 5, 0, Math.PI * 2)
-        ctx.fillStyle = grad
-        ctx.fill()
+        // Skip expensive radial gradient on mobile
+        if (!isMobile) {
+          const grad = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, r * 5)
+          grad.addColorStop(0, 'rgba(74,144,217,0.15)')
+          grad.addColorStop(1, 'rgba(74,144,217,0)')
+          ctx.beginPath()
+          ctx.arc(node.x, node.y, r * 5, 0, Math.PI * 2)
+          ctx.fillStyle = grad
+          ctx.fill()
+        }
 
-        // Core dot
         ctx.beginPath()
         ctx.arc(node.x, node.y, r, 0, Math.PI * 2)
         ctx.fillStyle = 'rgba(74,144,217,0.9)'

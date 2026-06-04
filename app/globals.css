@@ -46,6 +46,15 @@ body {
   min-height: 100vh;
 }
 
+/* Mobile: auto height, no pin interference */
+@media (max-width: 1023px) {
+  .epoch-section {
+    min-height: auto;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
 /* Glow effect using epoch accent color */
 .epoch-glow {
   position: absolute;

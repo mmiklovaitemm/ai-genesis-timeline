@@ -71,6 +71,31 @@ export default function ScoreScreen({ epochs, lang }: Props) {
       const section = sectionRef.current
       if (!section) return
 
+      const isMobile = window.matchMedia('(max-width: 1023px)').matches
+
+      if (isMobile) {
+        // Mobile: simple fade-in, no pin
+        gsap.fromTo(contentRef.current,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+            scrollTrigger: { trigger: section, start: 'top 80%', once: true } }
+        )
+        gsap.fromTo(scoreNumRef.current,
+          { opacity: 0, scale: 0.7 },
+          { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.5)', delay: 0.2,
+            scrollTrigger: { trigger: section, start: 'top 80%', once: true } }
+        )
+        if (dotsRef.current?.children) {
+          gsap.fromTo(Array.from(dotsRef.current.children),
+            { scale: 0, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.08, stagger: 0.06, delay: 0.4,
+              scrollTrigger: { trigger: section, start: 'top 80%', once: true } }
+          )
+        }
+        return
+      }
+
+      // Desktop: pin + scrub
       ScrollTrigger.create({
         trigger: section,
         start: 'top top',

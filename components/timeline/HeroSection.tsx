@@ -23,28 +23,42 @@ export default function HeroSection({ lang }: Props) {
 
   useGSAP(
     () => {
-      // Entry animation — plays on load
-      const tl = gsap.timeline({ delay: 0.3 })
+      const isMobile = window.matchMedia('(max-width: 1023px)').matches
 
-      tl.fromTo(
-        titleRef.current,
+      // Entry animation — same on all devices
+      const tl = gsap.timeline({ delay: 0.3 })
+      tl.fromTo(titleRef.current,
         { opacity: 0, y: 40 },
         { opacity: 1, y: 0, duration: 1.4, ease: 'power3.out' }
       )
-      tl.fromTo(
-        subtitleRef.current,
+      tl.fromTo(subtitleRef.current,
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' },
         '-=0.8'
       )
-      tl.fromTo(
-        scrollPromptRef.current,
+      tl.fromTo(scrollPromptRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.7 },
         '-=0.3'
       )
 
-      // Cinematic scroll-out: content scales into the screen (tunnel effect)
+      if (isMobile) {
+        // Mobile: simple fade-out on scroll, no 3D transforms
+        gsap.to(contentRef.current, {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: '+=50%',
+            scrub: 1,
+          },
+          opacity: 0,
+          y: -20,
+          ease: 'none',
+        })
+        return
+      }
+
+      // Desktop: cinematic scale + z tunnel effect
       gsap.to(contentRef.current, {
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -59,7 +73,6 @@ export default function HeroSection({ lang }: Props) {
         ease: 'none',
       })
 
-      // Canvas dims separately, slightly later
       gsap.to(canvasWrapRef.current, {
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -80,23 +93,20 @@ export default function HeroSection({ lang }: Props) {
       data-section="hero"
       className="relative h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Neural network canvas */}
       <div ref={canvasWrapRef} className="absolute inset-0">
         <NeuralCanvas />
       </div>
 
-      {/* Bottom fade to black */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0a0a0a] z-10 pointer-events-none" />
 
-      {/* Hero content */}
-      <div ref={contentRef} className="relative z-20 text-center px-8 max-w-4xl mx-auto">
-        <p className="font-mono text-xs tracking-[0.35em] text-[#4A90D9] uppercase mb-8">
+      <div ref={contentRef} className="relative z-20 text-center px-6 max-w-4xl mx-auto">
+        <p className="font-mono text-xs tracking-[0.35em] text-[#4A90D9] uppercase mb-6 md:mb-8">
           {isLt ? '1950 — Dabar' : '1950 — Present'}
         </p>
 
         <h1
           ref={titleRef}
-          className="text-7xl md:text-8xl lg:text-[9rem] font-black tracking-tighter leading-[0.9] mb-8 opacity-0"
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] font-black tracking-tighter leading-[0.9] mb-6 md:mb-8 opacity-0"
         >
           AI
           <br />
@@ -107,20 +117,19 @@ export default function HeroSection({ lang }: Props) {
 
         <p
           ref={subtitleRef}
-          className="text-white/40 text-base md:text-lg max-w-sm mx-auto leading-relaxed mb-20 opacity-0"
+          className="text-white/40 text-sm md:text-base lg:text-lg max-w-xs sm:max-w-sm mx-auto leading-relaxed mb-12 md:mb-20 opacity-0"
         >
           {isLt
             ? 'Dirbtinio intelekto istorija — nuo pirmosios svajonės iki šių dienų'
             : 'The history of artificial intelligence — from the first dream to the present moment'}
         </p>
 
-        {/* Scroll prompt */}
         <div
           ref={scrollPromptRef}
           className="flex flex-col items-center gap-3 text-white/25 text-[11px] font-mono tracking-widest uppercase opacity-0"
         >
           <span>{isLt ? 'Slinkti žemyn' : 'Scroll to begin'}</span>
-          <div className="w-px h-14 bg-gradient-to-b from-white/30 to-transparent" />
+          <div className="w-px h-10 md:h-14 bg-gradient-to-b from-white/30 to-transparent" />
         </div>
       </div>
     </section>

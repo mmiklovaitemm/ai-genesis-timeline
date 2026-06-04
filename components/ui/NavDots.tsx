@@ -64,7 +64,7 @@ export default function NavDots({ epochs, lang }: Props) {
   ]
 
   return (
-    <nav className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col items-end gap-3">
+    <nav className="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-50 flex-col items-end gap-3">
       {dots.map((dot, i) => {
         const isActive = i === 0 ? active === -1 : active === i - 1
         const isHovered = hovered === i

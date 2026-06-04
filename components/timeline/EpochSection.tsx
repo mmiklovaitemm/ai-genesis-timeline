@@ -31,13 +31,13 @@ export default function EpochSection({ epoch, lang, index }: Props) {
 
 
       {/* Two-column layout */}
-      <div className="relative z-10 w-full max-w-6xl px-8 md:px-12 py-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <div className="relative z-10 w-full max-w-6xl px-6 md:px-12 py-8 lg:py-16 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
 
         {/* LEFT — narrative + comments */}
         <div className="flex flex-col justify-center">
           <div
             ref={yearsRef}
-            className="font-mono text-sm tracking-widest mb-5 opacity-0"
+            className="font-mono text-xs md:text-sm tracking-widest mb-4 opacity-0"
             style={{ color: epoch.accent_color }}
           >
             {yearLabel}
@@ -45,14 +45,14 @@ export default function EpochSection({ epoch, lang, index }: Props) {
 
           <h2
             ref={headlineRef}
-            className="text-5xl md:text-6xl font-black tracking-tight mb-6 opacity-0 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-4 md:mb-6 opacity-0 leading-tight"
           >
             {t(epoch, 'title', lang)}
           </h2>
 
           <p
             ref={descRef}
-            className="text-base md:text-lg text-white/60 leading-relaxed opacity-0 mb-6"
+            className="text-sm md:text-base lg:text-lg text-white/60 leading-relaxed opacity-0 mb-6"
           >
             {t(epoch, 'description', lang)}
           </p>
