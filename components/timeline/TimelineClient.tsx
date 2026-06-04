@@ -32,7 +32,7 @@ export default function TimelineClient({ epochs }: Props) {
       <EpochColorTransition epochs={epochs} />
 
       {/* Content */}
-      <HeroSection />
+      <HeroSection lang={lang} />
       {epochs.map((epoch, i) => (
         <EpochSection key={epoch.id} epoch={epoch} lang={lang} index={i} />
       ))}

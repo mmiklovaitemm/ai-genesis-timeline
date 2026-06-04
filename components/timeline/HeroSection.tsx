@@ -8,7 +8,12 @@ import NeuralCanvas from './NeuralCanvas'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export default function HeroSection() {
+interface Props {
+  lang: 'en' | 'lt'
+}
+
+export default function HeroSection({ lang }: Props) {
+  const isLt = lang === 'lt'
   const sectionRef = useRef<HTMLElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLHeadingElement>(null)
@@ -86,7 +91,7 @@ export default function HeroSection() {
       {/* Hero content */}
       <div ref={contentRef} className="relative z-20 text-center px-8 max-w-4xl mx-auto">
         <p className="font-mono text-xs tracking-[0.35em] text-[#4A90D9] uppercase mb-8">
-          1950 — Present
+          {isLt ? '1950 — Dabar' : '1950 — Present'}
         </p>
 
         <h1
@@ -104,7 +109,9 @@ export default function HeroSection() {
           ref={subtitleRef}
           className="text-white/40 text-base md:text-lg max-w-sm mx-auto leading-relaxed mb-20 opacity-0"
         >
-          The history of artificial intelligence — from the first dream to the present moment
+          {isLt
+            ? 'Dirbtinio intelekto istorija — nuo pirmosios svajonės iki šių dienų'
+            : 'The history of artificial intelligence — from the first dream to the present moment'}
         </p>
 
         {/* Scroll prompt */}
@@ -112,7 +119,7 @@ export default function HeroSection() {
           ref={scrollPromptRef}
           className="flex flex-col items-center gap-3 text-white/25 text-[11px] font-mono tracking-widest uppercase opacity-0"
         >
-          <span>Scroll to begin</span>
+          <span>{isLt ? 'Slinkti žemyn' : 'Scroll to begin'}</span>
           <div className="w-px h-14 bg-gradient-to-b from-white/30 to-transparent" />
         </div>
       </div>
