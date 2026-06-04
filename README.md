@@ -1,14 +1,14 @@
-# AI Genesis — The History of Artificial Intelligence
+# AI Genesis - The History of Artificial Intelligence
 
 **Live site:** [ai-genesis-timeline.vercel.app](https://ai-genesis-timeline.vercel.app)
 
 ---
 
-An interactive scrollytelling timeline that takes you through the full history of artificial intelligence — from Alan Turing's first ideas in 1950 all the way to today's AI explosion. As you scroll, the story unfolds through animations, and you can test your knowledge and leave your thoughts along the way.
+An interactive scrollytelling timeline that takes you through the full history of artificial intelligence - from Alan Turing's first ideas in 1950 all the way to today's AI explosion. As you scroll, the story unfolds through animations, and you can test your knowledge and leave your thoughts along the way.
 
 ## What it does
 
-The experience is divided into 7 chapters, each representing a major era in AI history:
+The experience is divided into 7 chapters, each representing a major era in AI history
 
 1. **The Dream** (1950–1969) — symbolic AI, the Turing Test, the beginning
 2. **The Winter** (1970–1986) — broken promises, funding cuts, the first collapse
