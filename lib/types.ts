@@ -61,11 +61,7 @@ export interface QuizAnswer {
 }
 
 // Helpers for rendering with active language
-export function t<T extends Record<string, unknown>>(
-  obj: T,
-  key: string,
-  lang: Lang
-): string {
-  const val = obj[`${key}_${lang}`] ?? obj[`${key}_en`]
-  return (val as string) ?? ''
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function t(obj: any, key: string, lang: Lang): string {
+  return String(obj[`${key}_${lang}`] ?? obj[`${key}_en`] ?? '')
 }

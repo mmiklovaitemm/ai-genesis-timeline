@@ -18,12 +18,13 @@ export default function NeuralCanvas() {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-    const ctx = canvas.getContext('2d')!
+    const cvs = canvas // captured non-null reference for closures
+    const ctx = cvs.getContext('2d')!
     let animId: number
 
     const resize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      cvs.width = window.innerWidth
+      cvs.height = window.innerHeight
     }
     resize()
     window.addEventListener('resize', resize)
@@ -32,8 +33,8 @@ export default function NeuralCanvas() {
     const MAX_DIST = 160
 
     const nodes: Node[] = Array.from({ length: NODE_COUNT }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
+      x: Math.random() * cvs.width,
+      y: Math.random() * cvs.height,
       vx: (Math.random() - 0.5) * 0.4,
       vy: (Math.random() - 0.5) * 0.4,
       radius: Math.random() * 1.8 + 0.8,
@@ -42,7 +43,7 @@ export default function NeuralCanvas() {
     }))
 
     function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.clearRect(0, 0, cvs.width, cvs.height)
 
       // Connections
       for (let i = 0; i < nodes.length; i++) {
@@ -68,8 +69,8 @@ export default function NeuralCanvas() {
         node.y += node.vy
         node.pulse += node.pulseSpeed
 
-        if (node.x < 0 || node.x > canvas.width) node.vx *= -1
-        if (node.y < 0 || node.y > canvas.height) node.vy *= -1
+        if (node.x < 0 || node.x > cvs.width) node.vx *= -1
+        if (node.y < 0 || node.y > cvs.height) node.vy *= -1
 
         const r = node.radius + Math.sin(node.pulse) * 0.6
 
