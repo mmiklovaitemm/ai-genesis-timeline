@@ -1,4 +1,4 @@
-# AI Genesis - The History of Artificial Intelligence
+# AI Genesis | The History of Artificial Intelligence
 
 **Live site:** [ai-genesis-timeline.vercel.app](https://ai-genesis-timeline.vercel.app)
 
@@ -33,36 +33,8 @@ Each chapter has a quiz question and a comments section where you can share your
 
 ## Built with
 
-- **Next.js 16** — App Router, TypeScript, server components
-- **GSAP + ScrollTrigger** — all animations and scroll effects
-- **Supabase** — PostgreSQL database with row-level security
-- **NextAuth v5** — GitHub OAuth authentication
-- **Tailwind CSS v4** — styling
-
-## Running locally
-
-```bash
-git clone https://github.com/mmiklovaitemm/ai-genesis-timeline.git
-cd ai-genesis-timeline
-npm install
-```
-
-Create a `.env.local` file with your own Supabase and GitHub OAuth credentials:
-
-```
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
-SUPABASE_SECRET_KEY=
-NEXTAUTH_SECRET=
-NEXTAUTH_URL=http://localhost:3000
-GITHUB_CLIENT_ID=
-GITHUB_CLIENT_SECRET=
-```
-
-Then run the development server:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
+- **Next.js 16** - App Router, TypeScript, server components
+- **GSAP + ScrollTrigger** - all animations and scroll effects
+- **Supabase** - PostgreSQL database with row-level security
+- **NextAuth v5** - GitHub OAuth authentication
+- **Tailwind CSS v4** - styling
