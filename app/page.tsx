@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { supabaseAdmin } from '@/lib/supabase'
 import { Epoch } from '@/lib/types'
 import TimelineClient from '@/components/timeline/TimelineClient'
