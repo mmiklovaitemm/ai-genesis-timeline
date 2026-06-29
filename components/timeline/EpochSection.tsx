@@ -33,8 +33,8 @@ export default function EpochSection({ epoch, lang, index }: Props) {
       {/* Two-column layout */}
       <div className="relative z-10 w-full max-w-6xl px-6 md:px-12 py-8 lg:py-16 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
 
-        {/* LEFT — narrative + comments */}
-        <div className="flex flex-col justify-center">
+        {/* Narrative — order 1 on mobile, col-1 on desktop */}
+        <div className="flex flex-col justify-center order-1 lg:col-start-1 lg:row-start-1">
           <div
             ref={yearsRef}
             className="font-mono text-xs md:text-sm tracking-widest mb-4 opacity-0"
@@ -56,19 +56,20 @@ export default function EpochSection({ epoch, lang, index }: Props) {
           >
             {t(epoch, 'description', lang)}
           </p>
-
-          <div ref={contentRef} className="opacity-0">
-            <CommentsBlock
-              epochSlug={epoch.slug}
-              accentColor={epoch.accent_color}
-              lang={lang}
-            />
-          </div>
         </div>
 
-        {/* RIGHT — quiz only */}
-        <div ref={quizRef}>
+        {/* Quiz — order 2 on mobile, col-2 row-span-2 on desktop */}
+        <div ref={quizRef} className="order-2 lg:col-start-2 lg:row-start-1 lg:row-span-2">
           <QuizBlock
+            epochSlug={epoch.slug}
+            accentColor={epoch.accent_color}
+            lang={lang}
+          />
+        </div>
+
+        {/* Comments — order 3 on mobile, col-1 row-2 on desktop */}
+        <div ref={contentRef} className="order-3 opacity-0 lg:col-start-1 lg:row-start-2">
+          <CommentsBlock
             epochSlug={epoch.slug}
             accentColor={epoch.accent_color}
             lang={lang}
